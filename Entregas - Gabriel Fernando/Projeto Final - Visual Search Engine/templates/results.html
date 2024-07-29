@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary mb-4">Back to Search</a>
+            </div>
+        </div>
+        <h1 class="text-center mb-5">Search Results</h1>
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <h3>Uploaded Image</h3>
+                <img src="{{ input_image }}" class="img-fluid img-thumbnail mb-4" alt="Uploaded Image">
+            </div>
+        </div>
+        <div class="row">
+            <h3 class="text-center w-100 mb-4">Similar Images</h3>
+            {% for filename, distance in results %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename=filename) }}" class="card-img-top img-fluid" alt="Result Image">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Filename:</strong> {{ filename }}</p>
+                        <p class="card-text"><strong>Distance:</strong> {{ distance }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
